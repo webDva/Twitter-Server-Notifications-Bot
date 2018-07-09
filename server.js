@@ -36,12 +36,6 @@ const client = new Twitter({
 });
 
 // For sending server or feedback notifications
-// the sending server (or client) will send a notification JSON object that looks like this:
-// const the_whole_body = { // the whole request body will be accepted
-//     sender: 'baka game app',
-//     type: '🔔 browser-side error',
-//     message: 'something happened inside the browser game'
-// };
 app.post('/notification', (req, res) => {
     client.post('statuses/update', { status: (TWITTER_USERNAME_SPACED + JSON.stringify(req.body, null, ' ')).substring(0, MAX_CHARS - TWITTER_USERNAME_SPACED.length) }, (error, tweet, response) => {
         if (error) {
