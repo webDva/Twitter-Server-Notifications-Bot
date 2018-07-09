@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const Twitter = require('twitter');
 
@@ -26,6 +27,7 @@ MAX_CHARS = 280;
 
 const app = express();
 
+app.use(cors()); // for setting Access-Control-Allow-Origin to the * any origin wildcard
 app.use(bodyParser.json()); // for using req.body
 
 const client = new Twitter({
