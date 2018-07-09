@@ -8,7 +8,21 @@ process.on('uncaughtException', (error) => {
     process.exit(1);
 });
 
-require('./config');
+if (!process.env.NODE_ENV) {
+    require('./config');
+} else {
+    PORT = process.env.PORT;
+
+    CONSUMER_KEY = process.env.CONSUMER_KEY;
+    CONSUMER_SECRET = process.env.CONSUMER_SECRET;
+    ACCESS_TOKEN_KEY = process.env.ACCESS_TOKEN_KEY;
+    ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
+
+    TWITTER_USERNAME = process.env.TWITTER_USERNAME;
+}
+
+TWITTER_USERNAME_SPACED = TWITTER_USERNAME + ' ';
+MAX_CHARS = 280;
 
 const app = express();
 
