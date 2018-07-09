@@ -14,7 +14,7 @@ TODO
 
 TODO
 
-# `./config.js` file internals
+# ./config.js file internals
 
 ```javascript
 PORT = 3000;
@@ -27,7 +27,7 @@ ACCESS_TOKEN_SECRET = 'YOUR TWITTER ACCESS TOKEN SECRET';
 TWITTER_USERNAME = '@YOUR_TWITTER_USERNAME'; // with "@" prefix
 ```
 
-# `POST /notification` API endpoint
+# POST /notification API endpoint
 
 It's for relaying server notifications or browser-side messages to a Twitter bot. The only parameter is a single JSON object. The JSON object can be anything and can look like this:
 
