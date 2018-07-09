@@ -2,8 +2,12 @@
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
-        "start debug": "node --inspect --debug-brk server.js",
-        "start debug no break": "node --inspect server.js"
+        "start_debug": "node --inspect-brk server.js",
+        "start_debug_no_break": "node --inspect server.js"
+    },
+    "engines": {
+        "node": "9.4.0",
+        "npm": "5.6.0"
     },
     "dependencies": {
         "body-parser": "^1.18.3",
