@@ -31,7 +31,7 @@ TWITTER_USERNAME = '@YOUR_TWITTER_USERNAME'; // with "@" prefix
 
 It's for relaying server notifications or browser-side messages to a Twitter bot. The only parameter is a single JSON object. The JSON object can be anything and can look like this:
 
-```json
+```javascript
 {
     "sender": "web game #1",
     "type": "🔔 browser-side error",
