@@ -18,12 +18,7 @@ if (!process.env.NODE_ENV) {
     CONSUMER_SECRET = process.env.CONSUMER_SECRET;
     ACCESS_TOKEN_KEY = process.env.ACCESS_TOKEN_KEY;
     ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
-
-    TWITTER_USERNAME = process.env.TWITTER_USERNAME;
 }
-
-TWITTER_USERNAME_SPACED = TWITTER_USERNAME + ' ';
-MAX_CHARS = 280;
 
 const app = express();
 
@@ -39,7 +34,7 @@ const client = new Twitter({
 
 // For sending server or feedback notifications
 app.post('/notification', (req, res) => {
-    client.post('statuses/update', { status: (TWITTER_USERNAME_SPACED + JSON.stringify(req.body, null, ' ')).substring(0, MAX_CHARS - TWITTER_USERNAME_SPACED.length) }, (error, tweet, response) => {
+    client.post('statuses/update', { status: JSON.stringify(req.body, null, ' ').substring(0, 280) }, (error, tweet, response) => {
         if (error) {
             // a free heroku account will put up to about 100 console messages into a logging mechanism that you can still access
             console.log('[❌ Failed to post tweet] ' + JSON.stringify({ 'Twitter error': error, notification: req.body }, null, ' '));
