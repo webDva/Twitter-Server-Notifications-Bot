@@ -34,7 +34,11 @@ const client = new Twitter({
 
 // For sending server or feedback notifications
 app.post('/notification', (req, res) => {
-    client.post('statuses/update', { status: JSON.stringify(req.body, null, ' ').substring(0, 280) }, (error, tweet, response) => {
+    const originalJSONString = JSON.stringify(req.body, null, ' ');
+    const URIEncodedString = encodeURIComponent(originalJSONString);
+    const shortenedURIEncodedString = URIEncodedString.substr(0, 280);
+    const decodedShortenedURIEncodedString = decodeURIComponent(shortenedURIEncodedString);
+    client.post('statuses/update', { status: decodedShortenedURIEncodedString }, (error, tweet, response) => {
         if (error) {
             // a free heroku account will put up to about 100 console messages into a logging mechanism that you can still access
             console.log('[❌ Failed to post tweet] ' + JSON.stringify({ 'Twitter error': error, notification: req.body }, null, ' '));
