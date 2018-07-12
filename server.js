@@ -25,7 +25,7 @@ const app = express();
 app.use(cors()); // for setting Access-Control-Allow-Origin to the * any origin wildcard
 app.use(bodyParser.json()); // for using req.body
 
-const client = new Twitter({
+const twitterClient = new Twitter({
     consumer_key: CONSUMER_KEY,
     consumer_secret: CONSUMER_SECRET,
     access_token_key: ACCESS_TOKEN_KEY,
@@ -38,7 +38,7 @@ app.post('/notification', (req, res) => {
     const URIEncodedString = encodeURIComponent(originalJSONString);
     const shortenedURIEncodedString = URIEncodedString.substr(0, 280);
     const decodedShortenedURIEncodedString = decodeURIComponent(shortenedURIEncodedString);
-    client.post('statuses/update', { status: decodedShortenedURIEncodedString }, (error, tweet, response) => {
+    twitterClient.post('statuses/update', { status: decodedShortenedURIEncodedString }, (error, tweet, response) => {
         if (error) {
             // a free heroku account will put up to about 100 console messages into a logging mechanism that you can still access
             console.log('[❌ Failed to post tweet] ' + JSON.stringify({ 'Twitter error': error, notification: req.body }, null, ' '));
