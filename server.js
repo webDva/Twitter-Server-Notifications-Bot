@@ -12,8 +12,6 @@ process.on('uncaughtException', (error) => {
 if (!process.env.NODE_ENV) {
     require('./config');
 } else {
-    PORT = process.env.PORT;
-
     CONSUMER_KEY = process.env.CONSUMER_KEY;
     CONSUMER_SECRET = process.env.CONSUMER_SECRET;
     ACCESS_TOKEN_KEY = process.env.ACCESS_TOKEN_KEY;
@@ -56,6 +54,7 @@ app.use(function (error, req, res, next) {
     return res.send({ success: false });
 });
 
+const PORT = process.env.PORT || '3000';
 app.set('port', PORT);
 
 app.listen(PORT, (error) => {
