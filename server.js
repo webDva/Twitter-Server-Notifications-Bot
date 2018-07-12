@@ -52,7 +52,7 @@ app.post('/notification', (req, res) => {
 
 // uncaught API error handling route
 app.use(function (error, req, res, next) {
-    console.log('[❌ API error] ' + error);
+    console.log('[❌ API error] ' + error + ' ' + JSON.stringify(error, null, ' '));
     return res.send({ success: false });
 });
 
