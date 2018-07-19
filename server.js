@@ -51,7 +51,8 @@ app.post('/notification', (req, res) => {
 // uncaught API error handling route
 app.use(function (error, req, res, next) {
     // post the error to Twitter
-    const twitterPost = '[❌ API error] ' + error + '\n\nSee logs for more.';
+    const adHocID = Math.random().toString(36).substr(2, 5); // to prevent duplicate tweet errors
+    const twitterPost = '[❌ API error] ' + error + '\n\n' + adHocID + '\n\nSee logs for more.';
     const URIEncodedString = encodeURIComponent(twitterPost);
     const shortenedURIEncodedString = URIEncodedString.substr(0, 280);
     const decodedShortenedURIEncodedString = decodeURIComponent(shortenedURIEncodedString);
