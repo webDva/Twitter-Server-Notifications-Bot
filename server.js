@@ -51,15 +51,15 @@ app.post('/notification', (req, res) => {
 // uncaught API error handling route
 app.use(function (error, req, res, next) {
     // post the error to Twitter
-    const twitterPost = '[❌ API error] ' + error + ' | req.body: ' + error.body;
+    const twitterPost = '[❌ API error] ' + error + '\n\nSee logs for more.';
     const URIEncodedString = encodeURIComponent(twitterPost);
     const shortenedURIEncodedString = URIEncodedString.substr(0, 280);
     const decodedShortenedURIEncodedString = decodeURIComponent(shortenedURIEncodedString);
     twitterClient.post('statuses/update', { status: decodedShortenedURIEncodedString }, (twitterError, tweet, response) => {
         if (twitterError) {
-            console.log('[❌❌ Failed to post API error tweet] ' + error + ' ' + JSON.stringify({ 'Twitter error': twitterError, 'API error details': error }, null, ' '));
+            console.log('[❌❌ Failed to post API error tweet] ' + error + ' ' + JSON.stringify({ 'Twitter error': twitterError, 'API error details': error, 'req.body': req.body }, null, ' '));
         } else {
-            console.log('[❌✉️ API error server notification sent] ' + error + ' ' + JSON.stringify({ 'API error details': error }, null, ' '));
+            console.log('[❌✉️ API error server notification sent] ' + error + ' ' + JSON.stringify({ 'API error details': error, 'req.body': req.body }, null, ' '));
         }
     });
 
